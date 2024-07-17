@@ -1,6 +1,6 @@
 # Clockabilly
 
-![an AI-generated bird with gears and a clock in its belly](img/clockabilly.jpg)
+![an AI-generated bird with gears and a clock in its belly](https://raw.githubusercontent.com/acrlabs/clockabilly/master/img/clockabilly.jpg)
 
 A really simple trait wrapper for [chrono](https://docs.rs/chrono/latest/chrono/) that lets you mock out time in tests.
 

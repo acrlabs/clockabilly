@@ -2,8 +2,9 @@
 name = "clockabilly"
 authors = ["Applied Computing Research Labs"]
 description = "Trait wrapper around chrono for testing"
-version = "0.1.0"
+version = "0.1.1"
 readme = "README.md"
+license = "MIT"
 license-file = "LICENSE"
 edition = "2021"
 
