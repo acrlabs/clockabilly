@@ -1,0 +1,18 @@
+[package]
+name = "clockabilly"
+authors = ["Applied Computing Research Labs"]
+description = "Trait wrapper around chrono for testing"
+version = "0.1.0"
+readme = "README.md"
+license-file = "LICENSE"
+edition = "2021"
+
+[dependencies]
+chrono = "0.4.38"
+
+[features]
+mock = []
+
+[[example]]
+name = "basic"
+required-features = ["mock"]
