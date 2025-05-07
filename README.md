@@ -20,3 +20,23 @@ See the `basic` example for an example:
 ```
 
 For "simplicity", this re-exports all of `chrono`.
+
+### Sleeping
+
+You can also use this in place of calls to `tokio::time::sleep`; the real clock is just a wrapper around `sleep`, and
+the fake clock just advances the internal time counter by however many seconds you slept for.
+
+### Callbacks
+
+You can provide callback functions that change external state using the `add_callbacks` function, e.g.,
+
+```
+let mut x = 10;
+let mut clock = MockUtcClock::new(0);
+clock.add_callback(1, || x += 5); // Probably doesn't actually compile, because you probably need Arcs and stuff
+clock.sleep(20);
+assert_eq!(15, x);
+```
+
+You can add multiple callbacks for each timestamp; callbacks for a particular timestamp are executed in the order they
+were added.  Note that `sleep` and `advance` both execute the callbacks, but `set` does not.
