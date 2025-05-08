@@ -40,6 +40,11 @@ impl Clockable for UtcClock {
     }
 }
 
+pub mod prelude {
+    pub use super::Clockable;
+    pub use super::UtcClock;
+}
+
 #[cfg(feature = "mock")]
 pub mod mock {
     use std::collections::BTreeMap;
