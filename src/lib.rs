@@ -7,9 +7,16 @@ use tokio::time;
 
 #[async_trait]
 pub trait Clockable {
+    fn box_clone(&self) -> Box<dyn Clockable + Send>;
     fn now(&self) -> DateTime<Utc>;
     fn now_ts(&self) -> i64;
     async fn sleep(&self, seconds: i64);
+}
+
+impl Clone for Box<dyn Clockable + Send> {
+    fn clone(&self) -> Box<dyn Clockable + Send> {
+        self.box_clone()
+    }
 }
 
 #[derive(Clone)]
@@ -27,6 +34,10 @@ impl UtcClock {
 
 #[async_trait]
 impl Clockable for UtcClock {
+    fn box_clone(&self) -> Box<dyn Clockable + Send> {
+        Box::new(self.clone())
+    }
+
     fn now(&self) -> DateTime<Utc> {
         Utc::now()
     }
@@ -109,6 +120,10 @@ pub mod mock {
 
     #[async_trait]
     impl Clockable for MockUtcClock {
+        fn box_clone(&self) -> Box<dyn Clockable + Send> {
+            Box::new(self.clone())
+        }
+
         fn now(&self) -> DateTime<Utc> {
             return DateTime::from_timestamp(self.now_ts(), 0).unwrap();
         }
